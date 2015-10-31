@@ -1,8 +1,10 @@
 #include "ofApp.h"
+#include "programState.h"
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-
+  ofEnableSmoothing();
+  ofBackground(0);
 }
 
 //--------------------------------------------------------------
@@ -12,7 +14,9 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-
+  ofNoFill();
+  triangulation.draw();
+  ofDrawBitmapString("'r' to reset", ofPoint(10,20));
 }
 
 //--------------------------------------------------------------
@@ -42,7 +46,8 @@ void ofApp::mousePressed(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
-
+  triangulation.addPoint(ofPoint(x,y));
+  triangulation.triangulate();
 }
 
 //--------------------------------------------------------------

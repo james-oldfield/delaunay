@@ -2,6 +2,18 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:../src/programState.cpp">
+   </FileRef>
+   <FileRef
+      location = "group:../src/programState.h">
+   </FileRef>
+   <FileRef
+      location = "group:../src/imageInput.cpp">
+   </FileRef>
+   <FileRef
+      location = "group:../src/imageInput.h">
+   </FileRef>
+   <FileRef
       location = "self:">
    </FileRef>
 </Workspace>
