@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "ofxDelaunay.h"
+#include "imageInput.h"
 
 class ofApp : public ofBaseApp{
 
@@ -23,5 +24,7 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
   
     ofxDelaunay triangulation;
+    map<string, bool> programState;
+    ImageInput image;
 		
 };

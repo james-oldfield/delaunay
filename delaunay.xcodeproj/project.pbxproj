@@ -49,7 +49,6 @@
 		28CD9659C1D4E430F1B9C2E4 /* Delaunay.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = Delaunay.h; path = ../../../addons/ofxDelaunay/libs/Delaunay/src/Delaunay.h; sourceTree = SOURCE_ROOT; };
 		7D839B711BE54AFC0060C47D /* imageInput.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imageInput.cpp; sourceTree = "<group>"; };
 		7D839B721BE54AFC0060C47D /* imageInput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imageInput.h; sourceTree = "<group>"; };
-		7D839B751BE54CC70060C47D /* programState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = programState.h; sourceTree = "<group>"; };
 		8AA89AFF4E71C7EC510642B7 /* ofxDelaunay.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxDelaunay.h; path = ../../../addons/ofxDelaunay/src/ofxDelaunay.h; sourceTree = SOURCE_ROOT; };
 		BBE3E908E4BB3468853C50ED /* ofxDelaunay.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxDelaunay.cpp; path = ../../../addons/ofxDelaunay/src/ofxDelaunay.cpp; sourceTree = SOURCE_ROOT; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -147,7 +146,6 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				7D839B751BE54CC70060C47D /* programState.h */,
 				7D839B711BE54AFC0060C47D /* imageInput.cpp */,
 				7D839B721BE54AFC0060C47D /* imageInput.h */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,

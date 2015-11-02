@@ -1,10 +1,16 @@
 #include "ofApp.h"
-#include "programState.h"
 
 //--------------------------------------------------------------
 void ofApp::setup(){
   ofEnableSmoothing();
   ofBackground(0);
+  
+  // Initialise state of the program
+  programState["mainMenu"] = true;
+  programState["delaunay"] = false;
+  
+  image.init();
+  
 }
 
 //--------------------------------------------------------------
