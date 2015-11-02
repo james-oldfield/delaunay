@@ -25,6 +25,5 @@ class ofApp : public ofBaseApp{
   
     ofxDelaunay triangulation;
     map<string, bool> programState;
-    ImageInput image;
-		
+    ImageInput imageLoader;	
 };

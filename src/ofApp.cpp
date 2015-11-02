@@ -8,8 +8,7 @@ void ofApp::setup(){
   // Initialise state of the program
   programState["mainMenu"] = true;
   programState["delaunay"] = false;
-  
-  image.init();
+  programState["imageLoader"] = false;
   
 }
 
@@ -20,9 +19,16 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+  ofSetBackgroundColorHex(0x000000);
   ofNoFill();
   triangulation.draw();
-  ofDrawBitmapString("'r' to reset", ofPoint(10,20));
+  
+  if(programState["imageLoader"]) {
+    imageLoader.mount();
+    imageLoader.draw();
+  } else {
+    imageLoader.dismount();
+  }
 }
 
 //--------------------------------------------------------------
@@ -54,6 +60,7 @@ void ofApp::mousePressed(int x, int y, int button){
 void ofApp::mouseReleased(int x, int y, int button){
   triangulation.addPoint(ofPoint(x,y));
   triangulation.triangulate();
+  programState["imageLoader"] =! programState["imageLoader"];
 }
 
 //--------------------------------------------------------------

@@ -9,31 +9,28 @@
 #ifndef ____imageInput__
 #define ____imageInput__
 
-#include "ofApp.h"
+#include "ofMain.h"
 #include "ofEvents.h"
 
 class ImageInput {
   private:
     string url;
+    string placeholder;
     int posX;
     int posY;
-  
-    void draw();
-  
+    int textSize;
+    ofRectangle boundingBox;
+    ofRectangle tempBox;
+
     int cursor;
     ofTrueTypeFont helvetica;
   
   public:
     ImageInput();
-  
-    /*
-     * Getters and setters
-     */
-    void appendUrl(string s);
+    void draw();
+    void dismount();
+    void mount();
     void clearUrl();
-    string getUrl();
-  
-    void init();
 
     // Bind the keypress event
     void _keyPressed(ofKeyEventArgs & e);
