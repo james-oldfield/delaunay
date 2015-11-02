@@ -5,11 +5,7 @@ void ofApp::setup(){
   ofEnableSmoothing();
   ofBackground(0);
   
-  // Initialise state of the program
-  programState["mainMenu"] = true;
-  programState["delaunay"] = false;
-  programState["imageLoader"] = false;
-  
+  delImagePopulated = false;
 }
 
 //--------------------------------------------------------------
@@ -19,21 +15,29 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-  ofSetBackgroundColorHex(0x000000);
-  ofNoFill();
-  triangulation.draw();
+  imageLoader.mount();
+  loadImage();
+}
+
+void ofApp::loadImage() {
+  if(imageLoader.newImage) {
+    delImage.loadImage(imageLoader.getUrl());
+    delImagePopulated = true;
+    
+    imageLoader.newImage = false;
+  }
   
-  if(programState["imageLoader"]) {
-    imageLoader.mount();
-    imageLoader.draw();
-  } else {
-    imageLoader.dismount();
+  if(delImagePopulated) {
+    delImage.draw(0, 0);
   }
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-
+  // Switch state to image loader on 'f10' key
+  if(key == OF_KEY_F10) {
+    imageLoader.state =! imageLoader.state;
+  }
 }
 
 //--------------------------------------------------------------
@@ -60,7 +64,6 @@ void ofApp::mousePressed(int x, int y, int button){
 void ofApp::mouseReleased(int x, int y, int button){
   triangulation.addPoint(ofPoint(x,y));
   triangulation.triangulate();
-  programState["imageLoader"] =! programState["imageLoader"];
 }
 
 //--------------------------------------------------------------

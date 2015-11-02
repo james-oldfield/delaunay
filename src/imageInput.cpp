@@ -9,18 +9,21 @@
 #include "imageInput.h"
 
 ImageInput::ImageInput() {
+  newImage = false;
+  state = true;
   placeholder = "type in absolute image url";
   cursor = url.size(); // Set the cursor positon end of default text
-  posX = ofGetWindowWidth()/2;
+  posX = 50;
   posY = ofGetWindowHeight()/2;
   textSize = 20;
   tempBox = helvetica.getStringBoundingBox(placeholder, 0 ,0);
   
   helvetica.load("Helvetica.ttf", textSize);
+  helper.load("Helvetica.ttf", textSize/1.6);
 }
 
 /*
- * Handle the keypress event depending on the type of keyboard inout
+ * Handle the keypress event depending on the type of keyboard input
  */
 void ImageInput::_keyPressed(ofKeyEventArgs &e) {
   // If the key is a character, append it to the string
@@ -51,7 +54,8 @@ void ImageInput::_keyPressed(ofKeyEventArgs &e) {
         cursor--;
       break;
     case OF_KEY_RETURN:
-      cout << "enter!";
+      newImage = true;
+      state = false;
       break;
     default:
       cout << "unhandled key, sorry!" << endl;
@@ -60,18 +64,24 @@ void ImageInput::_keyPressed(ofKeyEventArgs &e) {
 }
 
 /*
- * Removes the event listener when the state is not active
- */
-void ImageInput::dismount() {
-  ofRemoveListener(ofEvents().keyPressed, this, &ImageInput::_keyPressed);
-}
-
-/*
  * Mounts the event listener to keyboard events
  */
 void ImageInput::mount() {
-  ofAddListener(ofEvents().keyPressed, this, &ImageInput::_keyPressed);
-  ImageInput::draw();
+  if(state) {
+    newImage = false;
+    ofAddListener(ofEvents().keyPressed, this, &ImageInput::_keyPressed);
+    ImageInput::draw();
+  } else {
+    ofRemoveListener(ofEvents().keyPressed, this, &ImageInput::_keyPressed);
+  }
+  return;
+}
+
+/*
+ * Public getter for url field
+ */
+string ImageInput::getUrl() {
+  return url;
 }
 
 /*
@@ -100,6 +110,10 @@ void ImageInput::draw() {
     if(ofGetElapsedTimeMillis()%1000 > 500) {
       helvetica.drawString("|", (posX+boundingBox.width), posY);
     }
-
   }
+  
+  // Draw helper text
+  ofSetHexColor(0xd3d3d3);
+  helper.drawString("Switch modes with f10 key. Type the url then press enter to load the image.", 50, posY+50);
+  
 }

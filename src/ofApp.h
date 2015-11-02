@@ -22,8 +22,11 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
+    void loadImage();
   
     ofxDelaunay triangulation;
-    map<string, bool> programState;
-    ImageInput imageLoader;	
+    ImageInput imageLoader;
+    ofImage delImage;
+    bool delImagePopulated;
+    bool triState;
 };

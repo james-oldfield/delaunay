@@ -24,13 +24,15 @@ class ImageInput {
 
     int cursor;
     ofTrueTypeFont helvetica;
+    ofTrueTypeFont helper;
   
   public:
     ImageInput();
+    bool newImage;
+    bool state;
     void draw();
-    void dismount();
+    string getUrl();
     void mount();
-    void clearUrl();
 
     // Bind the keypress event
     void _keyPressed(ofKeyEventArgs & e);
