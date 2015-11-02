@@ -30,6 +30,7 @@ void ofApp::run() {
   }
   
   if(!imageLoader.state) {
+    // No pointer to tri in state so it needs to be altered through a middleman class, here
     tri.state = true;
   }
 
@@ -68,8 +69,7 @@ void ofApp::mousePressed(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
-//  triangulation.addPoint(ofPoint(x,y));
-//  triangulation.triangulate();
+
 }
 
 //--------------------------------------------------------------
