@@ -64,7 +64,8 @@ void ImageInput::_keyPressed(ofKeyEventArgs &e) {
 }
 
 /*
- * Mounts the event listener to keyboard events
+ * Entry function to mount the loader.
+ * Adds/removes the keyboard event listeners.
  */
 void ImageInput::mount() {
   if(state) {
@@ -82,6 +83,15 @@ void ImageInput::mount() {
  */
 string ImageInput::getUrl() {
   return url;
+}
+int ImageInput::getX() {
+  return posX;
+}
+int ImageInput::getY() {
+  return posY;
+}
+ofTrueTypeFont * ImageInput::getFont() {
+  return &helper;
 }
 
 /*

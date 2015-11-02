@@ -28,11 +28,18 @@ class ImageInput {
   
   public:
     ImageInput();
-    bool newImage;
+    bool newImage; // Has there been a new image loaded (image pressed in this state)
     bool state;
     void draw();
     string getUrl();
     void mount();
+  
+    /*
+     * getters and setters
+     */
+    ofTrueTypeFont * getFont();
+    int getX();
+    int getY();
 
     // Bind the keypress event
     void _keyPressed(ofKeyEventArgs & e);

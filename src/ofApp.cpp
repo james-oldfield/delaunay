@@ -5,7 +5,7 @@ void ofApp::setup(){
   ofEnableSmoothing();
   ofBackground(0);
   
-  delImagePopulated = false;
+  tri.bindInput(&imageLoader); // Binds the image loader to the triangulate class
 }
 
 //--------------------------------------------------------------
@@ -15,21 +15,24 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-  imageLoader.mount();
-  loadImage();
+  run();
 }
 
-void ofApp::loadImage() {
-  if(imageLoader.newImage) {
-    delImage.loadImage(imageLoader.getUrl());
-    delImagePopulated = true;
-    
-    imageLoader.newImage = false;
+void ofApp::run() {
+  /*
+   * Start of main program, draw the different states.
+   */
+  if(imageLoader.state) {
+    imageLoader.mount();
+  }
+  else if(tri.state) {
+    tri.mount();
   }
   
-  if(delImagePopulated) {
-    delImage.draw(0, 0);
+  if(!imageLoader.state) {
+    tri.state = true;
   }
+
 }
 
 //--------------------------------------------------------------
@@ -37,6 +40,9 @@ void ofApp::keyPressed(int key){
   // Switch state to image loader on 'f10' key
   if(key == OF_KEY_F10) {
     imageLoader.state =! imageLoader.state;
+    imageLoader.mount();
+    
+    tri.state =! tri.state;
   }
 }
 
@@ -62,8 +68,8 @@ void ofApp::mousePressed(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
-  triangulation.addPoint(ofPoint(x,y));
-  triangulation.triangulate();
+//  triangulation.addPoint(ofPoint(x,y));
+//  triangulation.triangulate();
 }
 
 //--------------------------------------------------------------

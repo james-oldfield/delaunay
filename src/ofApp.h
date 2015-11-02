@@ -1,8 +1,8 @@
 #pragma once
 
 #include "ofMain.h"
-#include "ofxDelaunay.h"
 #include "imageInput.h"
+#include "triang.h"
 
 class ofApp : public ofBaseApp{
 
@@ -22,11 +22,10 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-    void loadImage();
+    void run();
   
-    ofxDelaunay triangulation;
     ImageInput imageLoader;
-    ofImage delImage;
+    Triang tri;
     bool delImagePopulated;
     bool triState;
 };

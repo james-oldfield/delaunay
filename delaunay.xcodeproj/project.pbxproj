@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7D2115701BE79D1100C088D3 /* triang.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7D21156E1BE79D1100C088D3 /* triang.cpp */; };
 		7D839B731BE54AFC0060C47D /* imageInput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7D839B711BE54AFC0060C47D /* imageInput.cpp */; };
 		87A34EBC0F47C29339CF1D28 /* Delaunay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1E2A7B869B0465AEBF28825D /* Delaunay.cpp */; };
 		9102D0609CDD0B902F138C68 /* ofxDelaunay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBE3E908E4BB3468853C50ED /* ofxDelaunay.cpp */; };
@@ -47,6 +48,8 @@
 /* Begin PBXFileReference section */
 		1E2A7B869B0465AEBF28825D /* Delaunay.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = Delaunay.cpp; path = ../../../addons/ofxDelaunay/libs/Delaunay/src/Delaunay.cpp; sourceTree = SOURCE_ROOT; };
 		28CD9659C1D4E430F1B9C2E4 /* Delaunay.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = Delaunay.h; path = ../../../addons/ofxDelaunay/libs/Delaunay/src/Delaunay.h; sourceTree = SOURCE_ROOT; };
+		7D21156E1BE79D1100C088D3 /* triang.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = triang.cpp; sourceTree = "<group>"; };
+		7D21156F1BE79D1100C088D3 /* triang.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = triang.h; sourceTree = "<group>"; };
 		7D839B711BE54AFC0060C47D /* imageInput.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imageInput.cpp; sourceTree = "<group>"; };
 		7D839B721BE54AFC0060C47D /* imageInput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imageInput.h; sourceTree = "<group>"; };
 		8AA89AFF4E71C7EC510642B7 /* ofxDelaunay.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxDelaunay.h; path = ../../../addons/ofxDelaunay/src/ofxDelaunay.h; sourceTree = SOURCE_ROOT; };
@@ -151,6 +154,8 @@
 				7D839B721BE54AFC0060C47D /* imageInput.h */,
 				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
+				7D21156E1BE79D1100C088D3 /* triang.cpp */,
+				7D21156F1BE79D1100C088D3 /* triang.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -264,6 +269,7 @@
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
 				9102D0609CDD0B902F138C68 /* ofxDelaunay.cpp in Sources */,
+				7D2115701BE79D1100C088D3 /* triang.cpp in Sources */,
 				87A34EBC0F47C29339CF1D28 /* Delaunay.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
