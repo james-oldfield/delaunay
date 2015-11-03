@@ -39,7 +39,19 @@ void Triang::mount() {
  * Handle the keypress event depending on the type of keyboard input
  */
 void Triang::_mousePressed(ofMouseEventArgs &e) {
+  ofImage tempImg;
+  ofColor tempCol;
+  
+  tempImg.grabScreen(e.x, e.y, 1, 1); // Grab the image at mouse location
+  unsigned char * pix = tempImg.getPixels();
+  
+  tempCol.r = (float) pix[0];
+  tempCol.g = (float) pix[1];
+  tempCol.b = (float) pix[2];
+  tempCol.a = 200;
+  
   triangulation.addPoint(ofPoint(e.x, e.y));
+  triangulation.addColour(tempCol);
   triangulation.triangulate();
 }
 

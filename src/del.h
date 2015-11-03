@@ -17,6 +17,11 @@ class Delaunay : public ofxDelaunay {
   public:
     vector<ofPoint> getTriangles();
     void drawTriangles();
+    int triangulate();
+    void addColour(ofColor _c);
+    void draw();
+  
+    vector<ofColor> pointCols; // Stores the colours of the added triangles
 };
 
 #endif /* defined(____del__) */

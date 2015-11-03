@@ -15,7 +15,7 @@ vector <ofPoint> Delaunay::getTriangles() {
     ITRIANGLE t;
     vector <ofPoint> points;
     
-    // NOTE - I have edited the library header file and changed PRIVATE members to PROTECTED
+    // NOTE - I have edited the library header file and changed all PRIVATE members to PROTECTED
     // So that i can inherit them.
     
     for(int i=0; i<getNumTriangles(); i++) {
@@ -26,4 +26,79 @@ vector <ofPoint> Delaunay::getTriangles() {
     }
     return points;
   }
+}
+
+/*
+ * Pretty much the library method, simply overriding it to add the ability to add colour when verticies are added to the mesh.
+ */
+int Delaunay::triangulate(){
+  
+  if(vertices.size() < 3){
+    return NULL;
+  }
+  
+  int nv = vertices.size();
+  
+  // make clone not to destroy vertices
+  vector<XYZI> verticesTemp = vertices;
+  qsort( &verticesTemp[0], verticesTemp.size(), sizeof( XYZI ), XYZICompare );
+  
+  //vertices required for Triangulate
+  vector<XYZ> verticesXYZ;
+  
+  //copy XYZIs to XYZ
+  for (int i = 0; i < nv; i++) {
+    XYZ v;
+    v.x = verticesTemp.at(i).x;
+    v.y = verticesTemp.at(i).y;
+    v.z = verticesTemp.at(i).z;
+    verticesXYZ.push_back(v);
+  }
+  
+  //add 3 emptly slots, required by the Triangulate call
+  verticesXYZ.push_back(XYZ());
+  verticesXYZ.push_back(XYZ());
+  verticesXYZ.push_back(XYZ());
+  
+  //allocate space for triangle indices
+  triangles.resize(3*nv);
+  
+  Triangulate( nv, &verticesXYZ[0], &triangles[0], ntri );
+  
+  //copy triangle data to ofxDelaunayTriangle.
+  triangleMesh.clear();
+  triangleMesh.setMode(OF_PRIMITIVE_TRIANGLES);
+  
+  //copy vertices
+  for (int i = 0; i < nv; i++){
+    triangleMesh.addVertex(ofVec3f(vertices[i].x,vertices[i].y,vertices[i].z));
+    triangleMesh.addColor(pointCols[i]);
+  }
+  
+  //copy triangles
+  for(int i = 0; i < ntri; i++){
+    triangleMesh.addIndex(verticesTemp.at(triangles[ i ].p1).i);
+    triangleMesh.addIndex(verticesTemp.at(triangles[ i ].p2).i);
+    triangleMesh.addIndex(verticesTemp.at(triangles[ i ].p3).i);
+  }
+  
+  return ntri;
+}
+
+/*
+ * Function to add the colour of the point to a vector used in the triangulate method.
+ */
+void Delaunay::addColour(ofColor _c) {
+  this->pointCols.push_back(_c);
+  
+  return;
+}
+
+/*
+ * Override the inherited draw method
+ */
+void Delaunay::draw(){
+  triangleMesh.draw();
+  triangleMesh.drawWireframe();
+  ofDrawBitmapStringHighlight("tri: " + ofToString(ntri) + "\nver:" + ofToString(vertices.size()), 30, 300);
 }
