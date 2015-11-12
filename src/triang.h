@@ -13,6 +13,7 @@
 #include "imageInput.h"
 #include "del.h"
 #include "ofEvents.h"
+#include "gui.hpp"
 
 
 class Triang {
@@ -23,14 +24,23 @@ class Triang {
     Triang();
     bool state; // State - show this module?
   
+    function<void()> cb = [&] { image->dismount(); }; // Lambda to Capture function callback to dismount image
+    function<void()> reset = [&] { triangulation.reset(); }; // Alias to the reset method in triangulation
+  
     // Bind the keypress event
     void _mousePressed(ofMouseEventArgs & e);
   
     ImageInput * image; // Pointer to the image loader
+    GUI * gui;
+  
     void bindInput(ImageInput * _image); // Binds the image loader pointer to the obj
+    void bindGUI(GUI * _gui);
+  
     ofImage delImage; // Image with which to perform triangulation on
-    bool loadImage(); // loads the image into delImage from image loader. returns false if failed.
+    bool loadImage(function<void()> callback); // loads the image into delImage from image loader. returns false if failed. Takes a callback func
     vector<ofPoint> triVec; // Contains the points to draw the triangles
+    float transPerc = 245;
+    void updateTrans(float & newTrans);
     void mount();
 };
 

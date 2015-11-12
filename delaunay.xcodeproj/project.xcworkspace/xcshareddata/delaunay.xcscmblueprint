@@ -1,0 +1,29 @@
+{
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "B98E3CFEC6501A75CC8123C65E3620511AA66D21" : 0,
+    "2DE9C8846D9375EAACFABA8963120E8E7719BAF5" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "8946C889-3BBF-42C2-91B9-ACC593FF964D",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "B98E3CFEC6501A75CC8123C65E3620511AA66D21" : "..\/..\/..\/..\/..\/addons\/ofxDelaunay",
+    "2DE9C8846D9375EAACFABA8963120E8E7719BAF5" : "..\/..\/..\/..\/.."
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "delaunay",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "delaunay.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/openframeworks\/openFrameworks.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "2DE9C8846D9375EAACFABA8963120E8E7719BAF5"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/obviousjim\/ofxDelaunay.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "B98E3CFEC6501A75CC8123C65E3620511AA66D21"
+    }
+  ]
+}

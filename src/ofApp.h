@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "imageInput.h"
 #include "triang.h"
+#include "gui.hpp"
 
 class ofApp : public ofBaseApp{
 
@@ -25,6 +26,7 @@ class ofApp : public ofBaseApp{
     void run();
   
     ImageInput imageLoader;
+    GUI gui;
     Triang tri;
     bool delImagePopulated;
     bool triState;

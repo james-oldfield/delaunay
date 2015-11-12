@@ -8,7 +8,7 @@
 
 #include "triang.h"
 
-Triang::Triang(): state(false) {};// loader will be displayed first, so defaults to false initially
+Triang::Triang(): state(false) { glShadeModel(GL_FLAT); }; // set the shader mode to flat to prevent gradient fill upon construction.
 
 /*
  * Entry method to exectue initial state of triangulation
@@ -16,13 +16,18 @@ Triang::Triang(): state(false) {};// loader will be displayed first, so defaults
 void Triang::mount() {
   if(state) {
     ofAddListener(ofEvents().mouseReleased, this, &Triang::_mousePressed); // Add event listener for keyboard
+    
     // If the image is loading correctly, proceed else throw error
-    if(loadImage()){
-      image->getFont()->drawString("Begin the triangulation by clicking three times to create supertriangle.", 10, 10);
+    if(loadImage( cb ) && image->getUrl().size() > 0){
       ofNoFill();
       delImage.draw(0,0);
       ofFill();
       triangulation.draw();
+      ofNoFill();
+      image->getFont()->drawString("Begin the triangulation by clicking three times to create supertriangle.", 10, 20);
+      image->getFont()->drawString("Further clicks will add points to the triangulation", 10, 40);
+      
+      gui->panel.draw();
     } else {
       // Catch for when the error doesn't load successfully
       string error = "Error loading your image. Did you get the file path right?";
@@ -36,30 +41,44 @@ void Triang::mount() {
 }
 
 /*
+ * Updates the transparency of the mesh
+ */
+void Triang::updateTrans(float & newTrans) {
+  for(auto col : triangulation.pointCols) {
+    col.a = newTrans;
+  }
+}
+
+/*
  * Handle the keypress event depending on the type of keyboard input
  */
 void Triang::_mousePressed(ofMouseEventArgs &e) {
-  ofImage tempImg;
   ofColor tempCol;
   
-  tempImg.grabScreen(e.x, e.y, 1, 1); // Grab the image at mouse location
-  unsigned char * pix = tempImg.getPixels();
+  unsigned char * pixels=delImage.getPixels(); // Get the pixels of the image
+  int ind = e.y*delImage.getWidth()*3 + e.x*3;
   
-  tempCol.r = (float) pix[0];
-  tempCol.g = (float) pix[1];
-  tempCol.b = (float) pix[2];
-  tempCol.a = 200;
+//  tempImg.grabScreen(e.x, e.y, 1, 1); // Grab the image at mouse location
+//  unsigned char * pix = tempImg.getPixels();
+  
+  tempCol.r = (float) pixels[ind];
+  tempCol.g = (float) pixels[ind+1];
+  tempCol.b = (float) pixels[ind+2];
+  tempCol.a = transPerc;
   
   triangulation.addPoint(ofPoint(e.x, e.y));
   triangulation.addColour(tempCol);
   triangulation.triangulate();
 }
 
-void Triang::bindInput(ImageInput * _image) {
-  image = _image;
-}
+void Triang::bindInput(ImageInput * _image) { image = _image; }
+void Triang::bindGUI(GUI * _gui) { gui = _gui; }
 
-bool Triang::loadImage() {
+/*
+ * Loads the image and then callsback the callback function pointer
+ * Takes an optional callback
+ */
+bool Triang::loadImage(function<void()> callback) {
   // Run check to see if the image has changed from the loader
   if(image->newImage) {
     delImage.loadImage(image->getUrl());
@@ -67,7 +86,9 @@ bool Triang::loadImage() {
     if(delImage.isAllocated()) {
       // If the image has successfully loaded
       delImagePopulated = true;
-      image->newImage = false;
+      
+      // Callback the callback function pointer
+      callback();
       
       return true;
     } else {

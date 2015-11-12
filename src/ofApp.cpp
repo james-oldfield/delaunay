@@ -6,6 +6,7 @@ void ofApp::setup(){
   ofBackground(0);
   
   tri.bindInput(&imageLoader); // Binds the image loader to the triangulate class
+  tri.bindGUI(&gui);
 }
 
 //--------------------------------------------------------------

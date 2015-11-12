@@ -11,7 +11,7 @@
 ImageInput::ImageInput() {
   newImage = false;
   state = true;
-  placeholder = "type in absolute image url";
+  placeholder = "type in image url";
   cursor = url.size(); // Set the cursor positon end of default text
   posX = 50;
   posY = ofGetWindowHeight()/2;
@@ -79,6 +79,17 @@ void ImageInput::mount() {
 }
 
 /*
+ * Function to dismount the state.
+ * Accessed from triang class when the image has loaded.
+ */
+void ImageInput::dismount() {
+  newImage = false;
+  state = false;
+  
+  return;
+}
+
+/*
  * Public getter for url field
  */
 string ImageInput::getUrl() {
@@ -125,5 +136,6 @@ void ImageInput::draw() {
   // Draw helper text
   ofSetHexColor(0xd3d3d3);
   helper.drawString("Switch modes with f10 key. Type the url then press enter to load the image.", 50, posY+50);
+  helper.drawString("type 'shop.jpg' for a default image", 50, posY+70);
   
 }

@@ -72,6 +72,7 @@ int Delaunay::triangulate(){
   //copy vertices
   for (int i = 0; i < nv; i++){
     triangleMesh.addVertex(ofVec3f(vertices[i].x,vertices[i].y,vertices[i].z));
+//    if (i%3 == 0)
     triangleMesh.addColor(pointCols[i]);
   }
   
@@ -99,6 +100,7 @@ void Delaunay::addColour(ofColor _c) {
  */
 void Delaunay::draw(){
   triangleMesh.draw();
+  ofSetColor(255);
   triangleMesh.drawWireframe();
   ofDrawBitmapStringHighlight("tri: " + ofToString(ntri) + "\nver:" + ofToString(vertices.size()), 30, 300);
 }

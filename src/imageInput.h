@@ -28,11 +28,13 @@ class ImageInput {
   
   public:
     ImageInput();
+  
     bool newImage; // Has there been a new image loaded (image pressed in this state)
     bool state;
     void draw();
     string getUrl();
     void mount();
+    void dismount(); // Function pointer used to dismount the state and change the newImage to false
   
     /*
      * getters and setters

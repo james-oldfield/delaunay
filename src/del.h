@@ -20,6 +20,7 @@ class Delaunay : public ofxDelaunay {
     int triangulate();
     void addColour(ofColor _c);
     void draw();
+    void drawTri();
   
     vector<ofColor> pointCols; // Stores the colours of the added triangles
 };
