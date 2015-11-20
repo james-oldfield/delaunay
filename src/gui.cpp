@@ -15,3 +15,7 @@ GUI::GUI() {
   panel.add(transp.setup("triangulation transparency", 75, 0, 100));
 }
 
+GUI::~GUI() {
+  delete this;
+}
+

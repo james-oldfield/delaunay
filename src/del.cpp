@@ -72,7 +72,6 @@ int Delaunay::triangulate(){
   //copy vertices
   for (int i = 0; i < nv; i++){
     triangleMesh.addVertex(ofVec3f(vertices[i].x,vertices[i].y,vertices[i].z));
-//    if (i%3 == 0)
     triangleMesh.addColor(pointCols[i]);
   }
   
@@ -87,12 +86,41 @@ int Delaunay::triangulate(){
 }
 
 /*
+ * Generic error handler with optional callback parameter
+ */
+template<typename F>
+void Delaunay::handleError(string error, F &cb) {
+  cout << error << endl;
+  
+  // If callback is supplied, exectute
+//  if(cb != nullptr)
+    cb();
+  
+  return;
+}
+
+/*
  * Function to add the colour of the point to a vector used in the triangulate method.
  */
 void Delaunay::addColour(ofColor _c) {
   this->pointCols.push_back(_c);
   
   return;
+}
+
+/*
+ * Function to remove the last added point from the triangulation
+ */
+void Delaunay::removeLastPoint() {
+  auto callback = [&] () { triangulate(); };
+  if(vertices.size() > 1) {
+    vertices.erase(vertices.end()-1);
+    callback();
+  } else {
+    handleError("can't remove anymore vertices!", callback);
+  }
+  
+
 }
 
 /*

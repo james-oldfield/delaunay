@@ -17,10 +17,15 @@ class Delaunay : public ofxDelaunay {
   public:
     vector<ofPoint> getTriangles();
     void drawTriangles();
+  
+    template<typename F>
+    void handleError(string errorCode, F &cb); // generic error handler with callback
     int triangulate();
     void addColour(ofColor _c);
     void draw();
     void drawTri();
+  
+    void removeLastPoint();
   
     vector<ofColor> pointCols; // Stores the colours of the added triangles
 };

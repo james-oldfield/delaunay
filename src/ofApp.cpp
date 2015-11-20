@@ -5,8 +5,9 @@ void ofApp::setup(){
   ofEnableSmoothing();
   ofBackground(0);
   
-  tri.bindInput(&imageLoader); // Binds the image loader to the triangulate class
-  tri.bindGUI(&gui);
+  imageLoader = new ImageInput();
+  gui = new GUI();
+  tri = new Triang(imageLoader, gui);
 }
 
 //--------------------------------------------------------------
@@ -23,16 +24,16 @@ void ofApp::run() {
   /*
    * Start of main program, draw the different states.
    */
-  if(imageLoader.state) {
-    imageLoader.mount();
+  if(imageLoader->state) {
+    imageLoader->mount();
   }
-  else if(tri.state) {
-    tri.mount();
+  else if(tri->state) {
+    tri->mount();
   }
   
-  if(!imageLoader.state) {
+  if(!imageLoader->state) {
     // No pointer to tri in state so it needs to be altered through a middleman class, here
-    tri.state = true;
+    tri->state = true;
   }
 
 }
@@ -41,10 +42,10 @@ void ofApp::run() {
 void ofApp::keyPressed(int key){
   // Switch state to image loader on 'f10' key
   if(key == OF_KEY_F10) {
-    imageLoader.state =! imageLoader.state;
-    imageLoader.mount();
+    imageLoader->state =! imageLoader->state;
+    imageLoader->mount();
     
-    tri.state =! tri.state;
+    tri->state =! tri->state;
   }
 }
 

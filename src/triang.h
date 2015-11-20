@@ -21,26 +21,28 @@ class Triang {
     bool delImagePopulated; // Keep track of whether the ofImage has been loaded
     Delaunay triangulation; // Triangulation object
   public:
-    Triang();
+    Triang(ImageInput * _image, GUI * _gui);
+    ~Triang();
+  
     bool state; // State - show this module?
   
     function<void()> cb = [&] { image->dismount(); }; // Lambda to Capture function callback to dismount image
     function<void()> reset = [&] { triangulation.reset(); }; // Alias to the reset method in triangulation
+    function<void()> removeLast = [&] { triangulation.removeLastPoint(); }; // Alias to the removeLastPoint method
   
-    // Bind the keypress event
+    // Bind the mousepressed event
     void _mousePressed(ofMouseEventArgs & e);
+    // Bind the keypress event
+    void _keyPressed(ofKeyEventArgs & e);
   
     ImageInput * image; // Pointer to the image loader
     GUI * gui;
-  
-    void bindInput(ImageInput * _image); // Binds the image loader pointer to the obj
-    void bindGUI(GUI * _gui);
   
     ofImage delImage; // Image with which to perform triangulation on
     bool loadImage(function<void()> callback); // loads the image into delImage from image loader. returns false if failed. Takes a callback func
     vector<ofPoint> triVec; // Contains the points to draw the triangles
     float transPerc = 245;
-    void updateTrans(float & newTrans);
+    void updateTrans(float const & newTrans);
     void mount();
 };
 

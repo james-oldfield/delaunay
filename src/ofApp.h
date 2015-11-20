@@ -25,9 +25,9 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
     void run();
   
-    ImageInput imageLoader;
-    GUI gui;
-    Triang tri;
+    ImageInput * imageLoader;
+    GUI * gui;
+    Triang * tri;
     bool delImagePopulated;
     bool triState;
 };

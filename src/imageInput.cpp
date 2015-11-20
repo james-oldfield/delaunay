@@ -21,11 +21,16 @@ ImageInput::ImageInput() {
   helvetica.load("Helvetica.ttf", textSize);
   helper.load("Helvetica.ttf", textSize/1.6);
 }
+ImageInput::~ImageInput() {
+  delete this;
+}
 
 /*
  * Handle the keypress event depending on the type of keyboard input
  */
 void ImageInput::_keyPressed(ofKeyEventArgs &e) {
+  
+  if(!this->state) { return; }
   // If the key is a character, append it to the string
   if (e.key >=32 && e.key <=126) {
     url.insert(url.begin()+cursor, e.key);

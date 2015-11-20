@@ -28,6 +28,7 @@ class ImageInput {
   
   public:
     ImageInput();
+    ~ImageInput();
   
     bool newImage; // Has there been a new image loaded (image pressed in this state)
     bool state;

@@ -17,6 +17,7 @@ class GUI {
   
   public:
     explicit GUI();
+    ~GUI();
     ofxPanel panel;
     ofxSlider<float> transp; // float slider from the template class
 };

@@ -8,7 +8,16 @@
 
 #include "triang.h"
 
-Triang::Triang(): state(false) { glShadeModel(GL_FLAT); }; // set the shader mode to flat to prevent gradient fill upon construction.
+Triang::Triang(ImageInput * _image, GUI * _gui): state(false), image(_image), gui(_gui){
+  glShadeModel(GL_FLAT);
+}; // set the shader mode to flat to prevent gradient fill upon construction.
+
+Triang::~Triang() {
+  delete image;
+  delete gui;
+  
+  delete this;
+}
 
 /*
  * Entry method to exectue initial state of triangulation
@@ -16,6 +25,7 @@ Triang::Triang(): state(false) { glShadeModel(GL_FLAT); }; // set the shader mod
 void Triang::mount() {
   if(state) {
     ofAddListener(ofEvents().mouseReleased, this, &Triang::_mousePressed); // Add event listener for keyboard
+    ofAddListener(ofEvents().keyPressed, this, &Triang::_keyPressed);
     
     // If the image is loading correctly, proceed else throw error
     if(loadImage( cb ) && image->getUrl().size() > 0){
@@ -36,6 +46,7 @@ void Triang::mount() {
   } else {
     // Remove the event listener once unmounted
     ofRemoveListener(ofEvents().mouseReleased, this, &Triang::_mousePressed);
+    ofRemoveListener(ofEvents().keyPressed, this, &Triang::_keyPressed);
   }
   return;
 }
@@ -43,7 +54,7 @@ void Triang::mount() {
 /*
  * Updates the transparency of the mesh
  */
-void Triang::updateTrans(float & newTrans) {
+void Triang::updateTrans(float const & newTrans) {
   for(auto col : triangulation.pointCols) {
     col.a = newTrans;
   }
@@ -71,8 +82,23 @@ void Triang::_mousePressed(ofMouseEventArgs &e) {
   triangulation.triangulate();
 }
 
-void Triang::bindInput(ImageInput * _image) { image = _image; }
-void Triang::bindGUI(GUI * _gui) { gui = _gui; }
+/*
+ * Handle the keypress event depending on the type of keyboard input
+ */
+void Triang::_keyPressed(ofKeyEventArgs &e) {
+  
+  if(!this->state) { return; }
+  
+  // Handlers to move cursor and remove from string
+  switch (e.key) {
+    case 'r':
+      this->removeLast();
+      break;
+    default:
+      break;
+      return;
+  }
+}
 
 /*
  * Loads the image and then callsback the callback function pointer
