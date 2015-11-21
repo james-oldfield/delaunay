@@ -18,8 +18,8 @@ class Delaunay : public ofxDelaunay {
     vector<ofPoint> getTriangles();
     void drawTriangles();
   
-    template<typename F>
-    void handleError(string errorCode, F &cb); // generic error handler with callback
+    template<typename Callback>
+    void handleError(string errorCode, Callback &cb = NULL); // generic error handler with callback
     int triangulate();
     void addColour(ofColor _c);
     void draw();

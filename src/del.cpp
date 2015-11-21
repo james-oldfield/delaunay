@@ -8,6 +8,17 @@
 
 #include "del.h"
 
+/*
+ * Generic error handler with optional callback parameter
+ * Takes a string to print error and a lambda callback, defaulting to NULL
+ */
+template<typename Callback>
+void Delaunay::handleError(string error, Callback &cb) {
+  cout << error << endl;
+  // If optional callback is supplied, exectute
+   cb();
+}
+
 vector <ofPoint> Delaunay::getTriangles() {
   vector <ofPoint> myTris;
   // So long as there's at least one triangle, return a vector of ITRIANGLE objs
@@ -86,20 +97,6 @@ int Delaunay::triangulate(){
 }
 
 /*
- * Generic error handler with optional callback parameter
- */
-template<typename F>
-void Delaunay::handleError(string error, F &cb) {
-  cout << error << endl;
-  
-  // If callback is supplied, exectute
-//  if(cb != nullptr)
-    cb();
-  
-  return;
-}
-
-/*
  * Function to add the colour of the point to a vector used in the triangulate method.
  */
 void Delaunay::addColour(ofColor _c) {
@@ -109,18 +106,20 @@ void Delaunay::addColour(ofColor _c) {
 }
 
 /*
- * Function to remove the last added point from the triangulation
+ * Function to remove the last added point from the triangulation and the colour
  */
 void Delaunay::removeLastPoint() {
   auto callback = [&] () { triangulate(); };
-  if(vertices.size() > 1) {
-    vertices.erase(vertices.end()-1);
+  cout << vertices.size() << endl;
+  if(vertices.size() != 0) {
+    vertices.erase(vertices.end()-1); // Delete the point from mesh
+    pointCols.erase(pointCols.end()-1); // Delete the colour value
     callback();
   } else {
+    reset();
     handleError("can't remove anymore vertices!", callback);
+    return;
   }
-  
-
 }
 
 /*
