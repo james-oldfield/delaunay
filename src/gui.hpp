@@ -19,6 +19,7 @@ class GUI {
     explicit GUI();
     ~GUI();
     ofxPanel panel;
+    float transPerc = 75; // Default value of 75
     ofxSlider<float> transp; // float slider from the template class
 };
 

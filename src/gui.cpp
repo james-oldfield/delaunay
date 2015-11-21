@@ -12,7 +12,7 @@
 GUI::GUI() {
   panel.setup();
   
-  panel.add(transp.setup("triangulation transparency", 75, 0, 100));
+  panel.add(transp.setup("triangulation transparency", transPerc, 0, 100));
 }
 
 GUI::~GUI() {

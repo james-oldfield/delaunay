@@ -40,8 +40,6 @@ class Triang {
   
     ofImage delImage; // Image with which to perform triangulation on
     bool loadImage(function<void()> callback); // loads the image into delImage from image loader. returns false if failed. Takes a callback func
-    vector<ofPoint> triVec; // Contains the points to draw the triangles
-    float transPerc = 245;
     void updateTrans(float const & newTrans);
     void mount();
 };

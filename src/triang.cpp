@@ -34,8 +34,8 @@ void Triang::mount() {
       ofFill();
       triangulation.draw();
       ofNoFill();
-      image->getFont()->drawString("Begin the triangulation by clicking three times to create supertriangle.", 10, 20);
-      image->getFont()->drawString("Further clicks will add points to the triangulation", 10, 40);
+      ofDrawBitmapStringHighlight("Begin the triangulation by clicking three times to create supertriangle", 10, 20);
+      ofDrawBitmapStringHighlight("Further clicks will add points to the triangulation", 10, 40);
       
       gui->panel.draw();
     } else {
@@ -75,7 +75,8 @@ void Triang::_mousePressed(ofMouseEventArgs &e) {
   tempCol.r = (float) pixels[ind];
   tempCol.g = (float) pixels[ind+1];
   tempCol.b = (float) pixels[ind+2];
-  tempCol.a = transPerc;
+//  tempCol.a = gui->panel.getParameter().cast<float>();
+//  cout << gui->panel. << endl;
   
   triangulation.addPoint(ofPoint(e.x, e.y));
   triangulation.addColour(tempCol);
@@ -108,6 +109,7 @@ bool Triang::loadImage(function<void()> callback) {
   // Run check to see if the image has changed from the loader
   if(image->newImage) {
     delImage.loadImage(image->getUrl());
+    triangulation.reset();
     
     if(delImage.isAllocated()) {
       // If the image has successfully loaded

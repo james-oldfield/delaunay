@@ -106,11 +106,22 @@ void Delaunay::addColour(ofColor _c) {
 }
 
 /*
+ * Perform a hard-reset on the whole triangulation
+ */
+void Delaunay::reset(){
+  vertices.clear();
+  triangles.clear();
+  triangleMesh.clear();
+  pointCols.clear();
+  
+  ntri = 0;
+}
+
+/*
  * Function to remove the last added point from the triangulation and the colour
  */
 void Delaunay::removeLastPoint() {
   auto callback = [&] () { triangulate(); };
-  cout << vertices.size() << endl;
   if(vertices.size() != 0) {
     vertices.erase(vertices.end()-1); // Delete the point from mesh
     pointCols.erase(pointCols.end()-1); // Delete the colour value
@@ -129,5 +140,4 @@ void Delaunay::draw(){
   triangleMesh.draw();
   ofSetColor(255);
   triangleMesh.drawWireframe();
-  ofDrawBitmapStringHighlight("tri: " + ofToString(ntri) + "\nver:" + ofToString(vertices.size()), 30, 300);
 }

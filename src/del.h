@@ -24,7 +24,7 @@ class Delaunay : public ofxDelaunay {
     void addColour(ofColor _c);
     void draw();
     void drawTri();
-  
+    void reset();
     void removeLastPoint();
   
     vector<ofColor> pointCols; // Stores the colours of the added triangles
