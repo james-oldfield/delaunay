@@ -11,17 +11,17 @@
 /* 
  * Initalise the helper with the helper text
  */
-ImageInput::ImageInput(): helper(new Helper(0, loadHelperText())) {
+ImageInput::ImageInput(): helper(new Helper(0, loadHelperText(), 16)) {
   newImage = false;
   state = true;
   placeholder = "type in image url";
   cursor = url.size(); // Set the cursor positon end of default text
   posX = 50;
   posY = ofGetWindowHeight()/2;
-  textSize = 20;
+  textSize = 35;
   tempBox = helvetica.getStringBoundingBox(placeholder, 0 ,0);
   
-  helvetica.load("Helvetica.ttf", textSize);
+  helvetica.load("hBold.ttf", textSize);
 }
 ImageInput::~ImageInput() {
   delete this;
@@ -32,9 +32,9 @@ ImageInput::~ImageInput() {
  */
 vector<string> ImageInput::loadHelperText() {
   vector<string> helper;
-  helper.push_back("test one");
-  helper.push_back("two!");
-  helper.push_back("Hello world! hello world!!!");
+  helper.push_back("Switch modes with f10 key.");
+  helper.push_back("Type the url then press enter to load the image.");
+  helper.push_back("Type 'shop.jpg' for a default image.");
   
   return helper;
 }
@@ -132,9 +132,6 @@ void ImageInput::draw() {
   // Draw the bounding box
   boundingBox = helvetica.getStringBoundingBox(url, 0, 0);
   
-  // draw the helper
-  helper->drawIcon();
-  
   ofSetHexColor(0xffffff);
   ofFill();
   
@@ -151,13 +148,10 @@ void ImageInput::draw() {
     // Draw the cursor
     ofSetHexColor(0x000000);
     if(ofGetElapsedTimeMillis()%1000 > 500) {
-      helvetica.drawString("|", (posX+boundingBox.width), posY);
+      helvetica.drawString("|", (posX+boundingBox.width+5), posY);
     }
   }
   
-  // Draw helper text
-  ofSetHexColor(0xd3d3d3);
-  helvetica.drawString("Switch modes with f10 key. Type the url then press enter to load the image.", 50, posY+50);
-  helvetica.drawString("type 'shop.jpg' for a default image", 50, posY+70);
-  
+  // draw the helper
+  helper->drawIcon();
 }

@@ -31,6 +31,7 @@ class ImageInput {
     ~ImageInput();
   
     unique_ptr<Helper> helper; // Helper object for information
+    vector<string> loadHelperText();
   
     bool newImage; // Has there been a new image loaded (image pressed in this state)
     bool state;
@@ -38,7 +39,6 @@ class ImageInput {
     string getUrl();
     void mount();
     void dismount(); // Function pointer used to dismount the state and change the newImage to false
-    vector<string> loadHelperText();
   
     /*
      * getters and setters

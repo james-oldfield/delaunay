@@ -8,7 +8,7 @@
 
 #include "triang.h"
 
-Triang::Triang(ImageInput * _image, GUI * _gui): state(false), image(_image), gui(_gui){
+Triang::Triang(ImageInput * _image, GUI * _gui): helper(new Helper(1, loadHelperText(), 16)), state(false), image(_image), gui(_gui) {
   glShadeModel(GL_FLAT);
 }; // set the shader mode to flat to prevent gradient fill upon construction.
 
@@ -17,6 +17,19 @@ Triang::~Triang() {
   delete gui;
   
   delete this;
+}
+
+/*
+ * Function to return the helper text. Helps separate concerns being a separate function
+ */
+vector<string> Triang::loadHelperText() {
+  vector<string> helper;
+  helper.push_back("Add points to the triangulation by clicking.");
+  helper.push_back("Click 3 times to create the super triangle.");
+  helper.push_back("You can remove points by pressing 'r' on your keyboard.");
+  helper.push_back("Press 'f10' to load a different image.");
+  
+  return helper;
 }
 
 /*
@@ -29,15 +42,13 @@ void Triang::mount() {
     
     // If the image is loading correctly, proceed else throw error
     if(loadImage( cb ) && image->getUrl().size() > 0){
-      ofNoFill();
+      (bgMode) ? ofNoFill() : ofSetColor(0);
       delImage.draw(0,0);
-      ofFill();
       triangulation.draw();
       ofNoFill();
-      ofDrawBitmapStringHighlight("Begin the triangulation by clicking three times to create supertriangle", 10, 20);
-      ofDrawBitmapStringHighlight("Further clicks will add points to the triangulation", 10, 40);
       
       gui->panel.draw();
+      helper->drawIcon();
     } else {
       // Catch for when the error doesn't load successfully
       string error = "Error loading your image. Did you get the file path right?";
@@ -94,6 +105,9 @@ void Triang::_keyPressed(ofKeyEventArgs &e) {
   switch (e.key) {
     case 'r':
       this->removeLast();
+      break;
+    case 'b':
+      bgMode =! bgMode;
       break;
     default:
       break;

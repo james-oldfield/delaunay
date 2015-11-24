@@ -22,9 +22,10 @@ class Helper {
     bool colour;
   
   public:
-    Helper(bool colour, vector<string> _messages);
+    Helper(bool colour, vector<string> _messages, int _fontSize);
     void drawHelper();
     void drawIcon();
+    ofTrueTypeFont * getFont();
 };
 
 #endif /* helper_hpp */

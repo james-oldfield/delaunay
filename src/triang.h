@@ -14,7 +14,7 @@
 #include "del.h"
 #include "ofEvents.h"
 #include "gui.hpp"
-
+#include "helper.hpp"
 
 class Triang {
   private:
@@ -25,6 +25,9 @@ class Triang {
     ~Triang();
   
     bool state; // State - show this module?
+  
+    unique_ptr<Helper> helper; // Helper object for information
+    vector<string> loadHelperText();
   
     function<void()> cb = [&] { image->dismount(); }; // Lambda to Capture function callback to dismount image
     function<void()> reset = [&] { triangulation.reset(); }; // Alias to the reset method in triangulation
@@ -39,6 +42,7 @@ class Triang {
     GUI * gui;
   
     ofImage delImage; // Image with which to perform triangulation on
+    bool bgMode = true; // Controls whether to show the image or not
     bool loadImage(function<void()> callback); // loads the image into delImage from image loader. returns false if failed. Takes a callback func
     void updateTrans(float const & newTrans);
     void mount();
