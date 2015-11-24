@@ -11,6 +11,7 @@
 
 #include "ofMain.h"
 #include "ofEvents.h"
+#include "helper.hpp"
 
 class ImageInput {
   private:
@@ -24,11 +25,12 @@ class ImageInput {
 
     int cursor;
     ofTrueTypeFont helvetica;
-    ofTrueTypeFont helper;
   
   public:
     ImageInput();
     ~ImageInput();
+  
+    unique_ptr<Helper> helper; // Helper object for information
   
     bool newImage; // Has there been a new image loaded (image pressed in this state)
     bool state;
@@ -36,6 +38,7 @@ class ImageInput {
     string getUrl();
     void mount();
     void dismount(); // Function pointer used to dismount the state and change the newImage to false
+    vector<string> loadHelperText();
   
     /*
      * getters and setters

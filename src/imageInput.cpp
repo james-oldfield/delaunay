@@ -8,7 +8,10 @@
 
 #include "imageInput.h"
 
-ImageInput::ImageInput() {
+/* 
+ * Initalise the helper with the helper text
+ */
+ImageInput::ImageInput(): helper(new Helper(0, loadHelperText())) {
   newImage = false;
   state = true;
   placeholder = "type in image url";
@@ -19,10 +22,21 @@ ImageInput::ImageInput() {
   tempBox = helvetica.getStringBoundingBox(placeholder, 0 ,0);
   
   helvetica.load("Helvetica.ttf", textSize);
-  helper.load("Helvetica.ttf", textSize/1.6);
 }
 ImageInput::~ImageInput() {
   delete this;
+}
+
+/*
+ * Function to return the helper text. Helps separate concerns being a separate function
+ */
+vector<string> ImageInput::loadHelperText() {
+  vector<string> helper;
+  helper.push_back("test one");
+  helper.push_back("two!");
+  helper.push_back("Hello world! hello world!!!");
+  
+  return helper;
 }
 
 /*
@@ -107,7 +121,7 @@ int ImageInput::getY() {
   return posY;
 }
 ofTrueTypeFont * ImageInput::getFont() {
-  return &helper;
+  return &helvetica;
 }
 
 /*
@@ -117,6 +131,9 @@ void ImageInput::draw() {
 
   // Draw the bounding box
   boundingBox = helvetica.getStringBoundingBox(url, 0, 0);
+  
+  // draw the helper
+  helper->drawIcon();
   
   ofSetHexColor(0xffffff);
   ofFill();
@@ -140,7 +157,7 @@ void ImageInput::draw() {
   
   // Draw helper text
   ofSetHexColor(0xd3d3d3);
-  helper.drawString("Switch modes with f10 key. Type the url then press enter to load the image.", 50, posY+50);
-  helper.drawString("type 'shop.jpg' for a default image", 50, posY+70);
+  helvetica.drawString("Switch modes with f10 key. Type the url then press enter to load the image.", 50, posY+50);
+  helvetica.drawString("type 'shop.jpg' for a default image", 50, posY+70);
   
 }

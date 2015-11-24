@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7D04D71B1C04B1D300FA29A4 /* helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7D04D7191C04B1D300FA29A4 /* helper.cpp */; };
 		7D2115701BE79D1100C088D3 /* triang.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7D21156E1BE79D1100C088D3 /* triang.cpp */; };
 		7D2115751BE7D82900C088D3 /* del.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7D2115731BE7D82900C088D3 /* del.cpp */; };
 		7D839B731BE54AFC0060C47D /* imageInput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7D839B711BE54AFC0060C47D /* imageInput.cpp */; };
@@ -58,6 +59,8 @@
 /* Begin PBXFileReference section */
 		1E2A7B869B0465AEBF28825D /* Delaunay.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = Delaunay.cpp; path = ../../../addons/ofxDelaunay/libs/Delaunay/src/Delaunay.cpp; sourceTree = SOURCE_ROOT; };
 		28CD9659C1D4E430F1B9C2E4 /* Delaunay.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = Delaunay.h; path = ../../../addons/ofxDelaunay/libs/Delaunay/src/Delaunay.h; sourceTree = SOURCE_ROOT; };
+		7D04D7191C04B1D300FA29A4 /* helper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = helper.cpp; sourceTree = "<group>"; };
+		7D04D71A1C04B1D300FA29A4 /* helper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = helper.hpp; sourceTree = "<group>"; };
 		7D21156E1BE79D1100C088D3 /* triang.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = triang.cpp; sourceTree = "<group>"; };
 		7D21156F1BE79D1100C088D3 /* triang.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = triang.h; sourceTree = "<group>"; };
 		7D2115731BE7D82900C088D3 /* del.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = del.cpp; sourceTree = "<group>"; };
@@ -214,6 +217,8 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				7D04D7191C04B1D300FA29A4 /* helper.cpp */,
+				7D04D71A1C04B1D300FA29A4 /* helper.hpp */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				7D839B711BE54AFC0060C47D /* imageInput.cpp */,
 				7D839B721BE54AFC0060C47D /* imageInput.h */,
@@ -344,6 +349,7 @@
 				7DAEAA241BF5110D0083FDF8 /* ofxBaseGui.cpp in Sources */,
 				9102D0609CDD0B902F138C68 /* ofxDelaunay.cpp in Sources */,
 				7DAEAA291BF5110D0083FDF8 /* ofxSlider.cpp in Sources */,
+				7D04D71B1C04B1D300FA29A4 /* helper.cpp in Sources */,
 				7D2115701BE79D1100C088D3 /* triang.cpp in Sources */,
 				7DAEAA251BF5110D0083FDF8 /* ofxButton.cpp in Sources */,
 				7DAEAA271BF5110D0083FDF8 /* ofxLabel.cpp in Sources */,
