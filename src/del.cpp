@@ -76,7 +76,7 @@ int Delaunay::triangulate(){
   
   Triangulate( nv, &verticesXYZ[0], &triangles[0], ntri );
   
-  //copy triangle data to ofxDelaunayTriangle.
+  // clear the mesh
   triangleMesh.clear();
   triangleMesh.setMode(OF_PRIMITIVE_TRIANGLES);
   

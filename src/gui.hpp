@@ -19,8 +19,13 @@ class GUI {
     explicit GUI();
     ~GUI();
     ofxPanel panel;
-    float transPerc = 75; // Default value of 75
-    ofxSlider<float> transp; // float slider from the template class
+    ofxSlider<int> transp; // float slider from the template class
+    void paramChanged(int &param);
+    ofParameter<int> transPerc;
+    void initListeners();
+    bool state = false;
+    bool newTransVal = false; // Notifier of new value, defaults to false
+
 };
 
 #endif /* gui_hpp */

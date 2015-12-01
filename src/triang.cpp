@@ -39,6 +39,13 @@ void Triang::mount() {
   if(state) {
     ofAddListener(ofEvents().mouseReleased, this, &Triang::_mousePressed); // Add event listener for keyboard
     ofAddListener(ofEvents().keyPressed, this, &Triang::_keyPressed);
+
+    gui->state = true;
+
+    if(gui->newTransVal) {
+      updateTrans(gui->transPerc.get());
+      gui->newTransVal = false;
+    }
     
     // If the image is loading correctly, proceed else throw error
     if(loadImage( cb ) && image->getUrl().size() > 0){
@@ -46,19 +53,21 @@ void Triang::mount() {
       delImage.draw(0,0);
       triangulation.draw();
       ofNoFill();
-      
+
       gui->panel.draw();
       helper->drawIcon();
     } else {
       // Catch for when the error doesn't load successfully
-      string error = "Error loading your image. Did you get the file path right?";
+      string error = "Error loading your image\n. Did you get the file path right?";
       image->getFont()->drawString(error, 20, image->getY());
     }
   } else {
     // Remove the event listener once unmounted
     ofRemoveListener(ofEvents().mouseReleased, this, &Triang::_mousePressed);
     ofRemoveListener(ofEvents().keyPressed, this, &Triang::_keyPressed);
+    gui->state = false;
   }
+  gui->initListeners();
   return;
 }
 
@@ -66,32 +75,32 @@ void Triang::mount() {
  * Updates the transparency of the mesh
  */
 void Triang::updateTrans(float const & newTrans) {
-  for(auto col : triangulation.pointCols) {
+  for(auto & col : triangulation.pointCols) {
     col.a = newTrans;
   }
+  triangulation.triangulate();
 }
 
 /*
  * Handle the keypress event depending on the type of keyboard input
  */
 void Triang::_mousePressed(ofMouseEventArgs &e) {
-  ofColor tempCol;
-  
-  unsigned char * pixels=delImage.getPixels(); // Get the pixels of the image
-  int ind = e.y*delImage.getWidth()*3 + e.x*3;
-  
-//  tempImg.grabScreen(e.x, e.y, 1, 1); // Grab the image at mouse location
-//  unsigned char * pix = tempImg.getPixels();
-  
-  tempCol.r = (float) pixels[ind];
-  tempCol.g = (float) pixels[ind+1];
-  tempCol.b = (float) pixels[ind+2];
-//  tempCol.a = gui->panel.getParameter().cast<float>();
-//  cout << gui->panel. << endl;
-  
-  triangulation.addPoint(ofPoint(e.x, e.y));
-  triangulation.addColour(tempCol);
-  triangulation.triangulate();
+  if(this->delImagePopulated) {
+    ofColor tempCol;
+    
+    unsigned char * pixels=delImage.getPixels(); // Get the pixels of the image
+    int ind = e.y*delImage.getWidth()*3 + e.x*3;
+    
+    tempCol.r = (float) pixels[ind];
+    tempCol.g = (float) pixels[ind+1];
+    tempCol.b = (float) pixels[ind+2];
+    tempCol.a = gui->transPerc.get();
+
+    // Get colour at mouse position and append to the mesh
+    triangulation.addPoint(ofPoint(e.x, e.y));
+    triangulation.addColour(tempCol);
+    triangulation.triangulate();
+  }
 }
 
 /*
