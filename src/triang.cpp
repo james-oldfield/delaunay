@@ -58,7 +58,9 @@ void Triang::mount() {
       helper->drawIcon();
     } else {
       // Catch for when the error doesn't load successfully
-      string error = "Error loading your image\n. Did you get the file path right?";
+      string error = "Error loading your image.\nDid you get the file path right?";
+      ofSetColor(255);
+      ofFill();
       image->getFont()->drawString(error, 20, image->getY());
     }
   } else {
