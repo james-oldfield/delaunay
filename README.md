@@ -1,8 +1,10 @@
 # delaunay
 
-***(WORK IN PROGRESS)***
+![](./delaunay.jpg)
 
-A small image editing program in openframeworks to create delaunay triangulations out of photos in open frameworks.
+A small image editing program to interactively create delaunay triangulations out of photos in open frameworks.
+
+Made for a small piece of uni coursework.
 
 ### non-native dependencies:
 
